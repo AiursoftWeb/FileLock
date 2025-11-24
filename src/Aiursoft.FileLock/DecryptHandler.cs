@@ -12,14 +12,14 @@ public class DecryptHandler : ExecutableCommandHandlerBuilder
         name: "--input",
         aliases: ["-i"])
     {
-        Description = "Source folder path to encrypt.",
+        Description = "Encrypted vault path.", // 修正了描述
         Required = true
     };
     private static readonly Option<string> OutputOption = new(
         name: "--output",
         aliases: ["-o"])
     {
-        Description = "Destination folder for the encrypted vault.",
+        Description = "Destination folder for restored files.", // 修正了描述
         Required = true
     };
 
@@ -29,9 +29,9 @@ public class DecryptHandler : ExecutableCommandHandlerBuilder
     {
         Description = "The master password (optional). If not set, will ask interactively."
     };
-    
+
     protected override Option[] GetCommandOptions() => [
-        InputOption, 
+        InputOption,
         OutputOption,
         PasswordOption
     ];
@@ -42,19 +42,13 @@ public class DecryptHandler : ExecutableCommandHandlerBuilder
         var outputPath = parseResult.GetValue(OutputOption)!;
         var password = parseResult.GetValue(PasswordOption);
 
+        // 修正逻辑：解密只需要输入一次密码
         if (string.IsNullOrWhiteSpace(password))
         {
-            Console.WriteLine("Setting up encryption.");
-            password = PasswordHelper.ReadPassword("Please set a master password: ");
-            var confirm = PasswordHelper.ReadPassword("Confirm password: ");
-            if (password != confirm)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Passwords do not match!");
-                Console.ResetColor();
-                return;
-            }
+            // 提示语也改得更准确了
+            password = PasswordHelper.ReadPassword($"Enter password to unlock vault at '{inputPath}': ");
         }
+
         Console.WriteLine("\nUnlocking vault...");
 
         var vault = new ZeroTrustVault();
@@ -67,13 +61,13 @@ public class DecryptHandler : ExecutableCommandHandlerBuilder
         catch (UnauthorizedAccessException)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n[Access Denied] Invalid password!");
-            throw;
+            await Console.Error.WriteLineAsync("\n[Access Denied] Invalid password!");
+            throw new InvalidOperationException("Invalid password.");
         }
         catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n[Error] {ex.Message}");
+            await Console.Error.WriteLineAsync($"\n[Error] {ex.Message}");
             throw;
         }
         finally
