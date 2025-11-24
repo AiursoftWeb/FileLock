@@ -36,6 +36,8 @@ dotnet tool install --global Aiursoft.FileLock
 
 Once installed, you can use the `file-lock` command in your terminal.
 
+![screenshot](./screenshot.png)
+
 ### 1 Encrypt a folder
 
 Encrypt a local folder into a secure vault. You will be prompted to enter a password securely (input will be hidden).
