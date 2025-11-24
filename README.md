@@ -1,10 +1,10 @@
 # Aiursoft.FileLock
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.cn/aiursoft/filelock/-/blob/master/LICENSE)
-[![Pipeline stat](https://gitlab.aiursoft.cn/aiursoft/filelock/badges/master/pipeline.svg)](https://gitlab.aiursoft.cn/aiursoft/filelock/-/pipelines)
-[![Test Coverage](https://gitlab.aiursoft.cn/aiursoft/filelock/badges/master/coverage.svg)](https://gitlab.aiursoft.cn/aiursoft/filelock/-/pipelines)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.cn/aiursoft/file-lock/-/blob/master/LICENSE)
+[![Pipeline stat](https://gitlab.aiursoft.cn/aiursoft/file-lock/badges/master/pipeline.svg)](https://gitlab.aiursoft.cn/aiursoft/file-lock/-/pipelines)
+[![Test Coverage](https://gitlab.aiursoft.cn/aiursoft/file-lock/badges/master/coverage.svg)](https://gitlab.aiursoft.cn/aiursoft/file-lock/-/pipelines)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.FileLock.svg)](https://www.nuget.org/packages/Aiursoft.FileLock/)
-[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/filelock.svg)](https://gitlab.aiursoft.cn/aiursoft/filelock/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/aiursoft/file-lock.svg)](https://gitlab.aiursoft.cn/aiursoft/file-lock/-/commits/master?ref_type=heads)
 
 **Aiursoft.FileLock** is a Zero-Trust, command-line file encryption tool designed for secure storage and cloud archiving.
 
