@@ -69,7 +69,8 @@ public class ZeroTrustVault
             catch (Exception ex)
             {
                 Console.WriteLine(); // 换行
-                await Console.Error.WriteLineAsync($"[Warning] Failed to decrypt {file.Name}: {ex.Message}");
+                Console.WriteLine($"[Warning] Failed to decrypt {file.Name}: {ex.Message}");
+                throw;
             }
         }
     }
