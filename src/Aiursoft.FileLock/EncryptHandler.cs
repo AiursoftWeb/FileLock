@@ -11,28 +11,28 @@ public class EncryptHandler : ExecutableCommandHandlerBuilder
     // 定义参数 -i 和 -o
     private static readonly Option<string> InputOption = new(
         name: "--input",
-        aliases: ["-i"])
+        aliases: "-i")
     {
         Description = "Source folder path to encrypt.",
         Required = true
     };
     private static readonly Option<string> OutputOption = new(
         name: "--output",
-        aliases: ["-o"])
+        aliases: "-o")
     {
         Description = "Destination folder for the encrypted vault.",
         Required = true
     };
-    
+
     private static readonly Option<string> PasswordOption = new(
         name: "--password",
-        aliases: ["-p"])
+        aliases: "-p")
     {
         Description = "The master password (optional). If not set, will ask interactively."
     };
-    
+
     protected override Option[] GetCommandOptions() => [
-        InputOption, 
+        InputOption,
         OutputOption,
         PasswordOption
     ];
@@ -56,7 +56,7 @@ public class EncryptHandler : ExecutableCommandHandlerBuilder
                 return;
             }
         }
-    
+
         Console.WriteLine("\nStarting encryption...");
         var vault = new ZeroTrustVault();
         try

@@ -10,14 +10,14 @@ public class DecryptHandler : ExecutableCommandHandlerBuilder
 
     private static readonly Option<string> InputOption = new(
         name: "--input",
-        aliases: ["-i"])
+        aliases: "-i")
     {
         Description = "Encrypted vault path.", // 修正了描述
         Required = true
     };
     private static readonly Option<string> OutputOption = new(
         name: "--output",
-        aliases: ["-o"])
+        aliases: "-o")
     {
         Description = "Destination folder for restored files.", // 修正了描述
         Required = true
@@ -25,7 +25,7 @@ public class DecryptHandler : ExecutableCommandHandlerBuilder
 
     private static readonly Option<string> PasswordOption = new(
         name: "--password",
-        aliases: ["-p"])
+        aliases: "-p")
     {
         Description = "The master password (optional). If not set, will ask interactively."
     };
