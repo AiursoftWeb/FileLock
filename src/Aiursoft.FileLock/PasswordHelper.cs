@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Aiursoft.FileLock;
 
+[ExcludeFromCodeCoverage]
 public static class PasswordHelper
 {
     public static string ReadPassword(string prompt)
