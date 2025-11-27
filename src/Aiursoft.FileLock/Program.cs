@@ -1,5 +1,6 @@
 using Aiursoft.CommandFramework;
 using Aiursoft.CommandFramework.Models;
+using Aiursoft.FileLock;
 
 return await new NestedCommandApp()
     .WithGlobalOptions(CommonOptionsProvider.VerboseOption) // 支持 --verbose
