@@ -13,7 +13,7 @@ public class ZeroTrustVault
     private const int TagSize = 16;
     private const int UuidSize = 16;
 
-    private class VaultConfig
+    private sealed class VaultConfig
     {
         public string VaultSaltBase64 { get; init; } = string.Empty;
         public string VerifierNonceBase64 { get; set; } = string.Empty;
@@ -32,10 +32,10 @@ public class ZeroTrustVault
         var total = files.Length;
         var current = 0;
 
-        foreach (var file in files)
+        foreach (var file in files.Select(f => f.FullName))
         {
             current++;
-            var relativePath = Path.GetRelativePath(sourceFolder, file.FullName);
+            var relativePath = Path.GetRelativePath(sourceFolder, file);
             var fileUuid = RandomNumberGenerator.GetBytes(UuidSize);
             var uuidString = BitConverter.ToString(fileUuid).Replace("-", "").ToLower();
             var destPath = Path.Combine(encryptedOutputFolder, uuidString + ".enc");
@@ -43,7 +43,7 @@ public class ZeroTrustVault
             // 简单的进度显示
             Console.Write($"\r[{current}/{total}] Encrypting: {relativePath} -> {uuidString}.enc   ");
 
-            await EncryptSingleFile(file.FullName, relativePath, destPath, masterKey, fileUuid);
+            await EncryptSingleFile(file, relativePath, destPath, masterKey, fileUuid);
         }
     }
 
@@ -75,7 +75,7 @@ public class ZeroTrustVault
         }
     }
 
-    private async Task EncryptSingleFile(string inputPath, string relativePath, string outputPath, byte[] masterKey, byte[] fileUuid)
+    private static async Task EncryptSingleFile(string inputPath, string relativePath, string outputPath, byte[] masterKey, byte[] fileUuid)
     {
         var fileContent = await File.ReadAllBytesAsync(inputPath);
         var pathBytes = Encoding.UTF8.GetBytes(relativePath);
@@ -106,7 +106,7 @@ public class ZeroTrustVault
         await fs.WriteAsync(ciphertext);
     }
 
-    private async Task DecryptSingleFile(string inputPath, string outputRoot, byte[] masterKey)
+    private static async Task DecryptSingleFile(string inputPath, string outputRoot, byte[] masterKey)
     {
         await using var fs = new FileStream(inputPath, FileMode.Open);
 
@@ -181,9 +181,9 @@ public class ZeroTrustVault
         return masterKey;
     }
 
-    private void CreateVerifier(byte[] masterKey, VaultConfig config)
+    private static void CreateVerifier(byte[] masterKey, VaultConfig config)
     {
-        var plain = Encoding.UTF8.GetBytes("VALID");
+        var plain = "VALID"u8.ToArray();
         var nonce = RandomNumberGenerator.GetBytes(NonceSize);
         var cipher = new byte[plain.Length];
         var tag = new byte[TagSize];
@@ -193,7 +193,7 @@ public class ZeroTrustVault
         config.VerifierCipherBase64 = Convert.ToBase64String(cipher);
     }
 
-    private void ValidatePassword(byte[] masterKey, VaultConfig config)
+    private static void ValidatePassword(byte[] masterKey, VaultConfig config)
     {
         var nonce = Convert.FromBase64String(config.VerifierNonceBase64);
         var tag = Convert.FromBase64String(config.VerifierTagBase64);
