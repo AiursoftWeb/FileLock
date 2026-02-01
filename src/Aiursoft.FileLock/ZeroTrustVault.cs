@@ -23,6 +23,7 @@ public class ZeroTrustVault
 
     public async Task Encrypt(string sourceFolder, string encryptedOutputFolder, string userKey)
     {
+        EnsureOutputEmpty(encryptedOutputFolder);
         var masterKey = InitOrLoadVault(encryptedOutputFolder, userKey);
         var sourceDir = new DirectoryInfo(sourceFolder);
 
@@ -49,6 +50,7 @@ public class ZeroTrustVault
 
     public async Task Decrypt(string sourceFolder, string decryptedOutputFolder, string userKey)
     {
+        EnsureOutputEmpty(decryptedOutputFolder);
         var masterKey = InitOrLoadVault(sourceFolder, userKey, allowCreate: false);
         var sourceDir = new DirectoryInfo(sourceFolder);
 
@@ -72,6 +74,14 @@ public class ZeroTrustVault
                 Console.WriteLine($"[Warning] Failed to decrypt {file.Name}: {ex.Message}");
                 throw;
             }
+        }
+    }
+
+    private static void EnsureOutputEmpty(string path)
+    {
+        if (Directory.Exists(path) && Directory.EnumerateFileSystemEntries(path).Any())
+        {
+            throw new InvalidOperationException($"Output directory '{path}' is not empty.");
         }
     }
 
