@@ -1,4 +1,4 @@
-﻿using Aiursoft.CommandFramework;
+using Aiursoft.CommandFramework;
 using Aiursoft.CommandFramework.Models;
 using Aiursoft.CSTools.Tools;
 
@@ -60,7 +60,7 @@ public class FileLockIntegrationTests
             // 创建模拟源数据：包含一个视频和一个照片文件夹
             Directory.CreateDirectory(tempSource);
             File.Copy(_testVideo, Path.Combine(tempSource, "video.mp4"));
-            
+
             // 模拟你的 assets 结构复制过去
             var photoDest = Path.Combine(tempSource, "photos");
             Directory.CreateDirectory(photoDest);
@@ -75,7 +75,7 @@ public class FileLockIntegrationTests
             // 但在 TestRunAsync 中，如果我们是用 NestedCommandApp 启动的，
             // 并且 FileLockHandler 是 Feature，那么命令参数应该是 ["file-lock", "encrypt", ...]
             var encryptResult = await _program.TestRunAsync([
-                "file-lock", 
+                "file-lock",
                 "encrypt",
                 "-i", tempSource,
                 "-o", tempVault,
@@ -141,8 +141,8 @@ public class FileLockIntegrationTests
         var tempSource = Path.Combine(Path.GetTempPath(), $"FileLock-Src-{testRunId}");
         var tempVault = Path.Combine(Path.GetTempPath(), $"FileLock-Vault-{testRunId}");
         var tempRestored = Path.Combine(Path.GetTempPath(), $"FileLock-Fail-{testRunId}");
-        
-        try 
+
+        try
         {
             Directory.CreateDirectory(tempSource);
             File.WriteAllText(Path.Combine(tempSource, "secret.txt"), "content");
@@ -168,15 +168,15 @@ public class FileLockIntegrationTests
             // 但通常设计良好的 CLI 在错误时应该返回非 0。
             // 检查之前的代码，我们 catch 了异常并打印 Console.Error，但没有显式返回 exit code 1。
             // 如果 CommandFramework 默认处理 void/Task 返回值为 0，这里可能需要 Assert Output 包含 "Invalid password"
-            
+
             Console.WriteLine(result.StdOut);
-            
+
             // 更加严格的测试：检查输出是否包含错误提示
             Assert.IsTrue(
-                result.StdErr.Contains("Invalid password") || 
-                result.StdErr.Contains("Access Denied") || 
+                result.StdErr.Contains("Invalid password") ||
+                result.StdErr.Contains("Access Denied") ||
                 result.StdErr.Contains("Unauthorized"));
-            
+
             // 确保没有文件被解密
             Assert.IsFalse(Directory.Exists(tempRestored) && Directory.GetFiles(tempRestored).Length > 0);
         }
