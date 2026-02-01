@@ -1,6 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Aiursoft.FileLock;
-
 namespace Aiursoft.FileLock.Tests;
 
 [TestClass]
