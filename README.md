@@ -1,6 +1,6 @@
 # Aiursoft.FileLock
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/blob/master/LICENSE)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AiursoftWeb/filelock/blob/master/LICENSE)
 [![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/filelock/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
 [![Test Coverage](https://gitlab.aiursoft.com/aiursoft/filelock/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.FileLock.svg)](https://www.nuget.org/packages/Aiursoft.FileLock/)
