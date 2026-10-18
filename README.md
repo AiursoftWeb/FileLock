@@ -4,7 +4,7 @@
 [![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/filelock/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
 [![Test Coverage](https://gitlab.aiursoft.com/aiursoft/filelock/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.FileLock.svg)](https://www.nuget.org/packages/Aiursoft.FileLock/)
-[![ManHours](https://manhours.aiursoft.com/r/gitlab.aiursoft.com/aiursoft/filelock.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.com/r/github.com/aiursoftweb/filelock.svg)](https://manhours.aiursoft.com/r/github.com/aiursoftweb/filelock.html)
 
 **Aiursoft.FileLock** is a Zero-Trust, command-line file encryption tool designed for secure storage and cloud archiving.
 
