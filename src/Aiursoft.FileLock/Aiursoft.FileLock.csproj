@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Version>10.0.20</Version>
+    <Version>10.0.21</Version>
     <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>file-lock</AssemblyName>
     <RootNamespace>Aiursoft.FileLock</RootNamespace>
@@ -23,9 +23,9 @@
     <PackageId>Aiursoft.FileLock</PackageId>
     <PackageTags>cli nuget dotnet ffmpeg</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://gitlab.aiursoft.cn/aiursoft/FileLock</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AiursoftWeb/filelock</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://gitlab.aiursoft.cn/Anduin/FileLock</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AiursoftWeb/filelock</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
