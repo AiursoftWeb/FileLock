@@ -3,6 +3,7 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AiursoftWeb/filelock/blob/master/LICENSE)
 [![Pipeline stat](https://gitlab.aiursoft.com/aiursoft/filelock/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
 [![Test Coverage](https://gitlab.aiursoft.com/aiursoft/filelock/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
+[![S360 compliance](https://s360.aiursoft.com/badge.svg?project=aiursoft%2Ffilelock)](https://s360.aiursoft.com/SupplyChain?tab=projects&project=aiursoft%2Ffilelock&scope=baseline&ecosystem=all)
 [![NuGet version](https://img.shields.io/nuget/v/Aiursoft.FileLock.svg)](https://www.nuget.org/packages/Aiursoft.FileLock/)
 [![ManHours](https://manhours.aiursoft.com/r/github.com/aiursoftweb/filelock.svg)](https://manhours.aiursoft.com/r/github.com/aiursoftweb/filelock.html)
 
