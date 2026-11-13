@@ -38,7 +38,7 @@ public class ZeroTrustVault
             current++;
             var relativePath = Path.GetRelativePath(sourceFolder, file);
             var fileUuid = RandomNumberGenerator.GetBytes(UuidSize);
-            var uuidString = BitConverter.ToString(fileUuid).Replace("-", "").ToLower();
+            var uuidString = BitConverter.ToString(fileUuid).Replace("-", "").ToLowerInvariant();
             var destPath = Path.Combine(encryptedOutputFolder, uuidString + ".enc");
 
             // 简单的进度显示
