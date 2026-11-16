@@ -1,5 +1,6 @@
-# Aiursoft.FileLock
+# Aiursoft FileLock
 
+<a name="aiursoftfilelock"></a>
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/AiursoftWeb/filelock/blob/master/LICENSE)
 [![Pipeline stat](https://badge-proxy.aiursoft.com/aiursoft/filelock/badges/master/pipeline.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
 [![Test Coverage](https://badge-proxy.aiursoft.com/aiursoft/filelock/badges/master/coverage.svg)](https://gitlab.aiursoft.com/aiursoft/filelock/-/pipelines)
@@ -9,9 +10,16 @@
 
 **Aiursoft.FileLock** is a Zero-Trust, command-line file encryption tool designed for secure storage and cloud archiving.
 
+## Overview
+
+### What is FileLock?
+
+Encrypt a folder into an obfuscated vault and restore it later using the password. File contents, original names and directory structure are stored encrypted.
+
 It converts your file structure into a flat, obfuscated vault where filenames, directory structures, and file contents are completely hidden from the storage provider.
 
-## Why FileLock?
+<a name="why-filelock"></a>
+**Why FileLock?**
 
 * **🛡️ Zero-Trust Architecture**: The server (or storage medium) sees nothing but random UUIDs. It cannot know what you stored, nor the original filenames or directory tree.
 * **🔒 Industrial Strength Cryptography**:
@@ -21,25 +29,41 @@ It converts your file structure into a flat, obfuscated vault where filenames, d
 * **🕵️ Metadata Obfuscation**: Original filenames and paths are encrypted inside the file payload. The physical files are renamed to meaningless `UUID.enc`.
 * **🚀 Cross-Platform**: Runs anywhere .NET runs (Windows, Linux, macOS).
 
-## Install
+## Installation
 
-Requirements:
-
-1. [.NET 10 SDK](http://dot.net/) or later.
-
-Run the following command to install this tool globally:
+<a name="install"></a>
+Install the CLI with the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0):
 
 ```bash
 dotnet tool install --global Aiursoft.FileLock
 ````
 
+Update an existing installation:
+
+```bash
+dotnet tool update --global Aiursoft.FileLock
+```
+
+Remove the CLI:
+
+```bash
+dotnet tool uninstall --global Aiursoft.FileLock
+```
+
 ## Usage
+
+Run the command to see available options:
+
+```bash
+file-lock --help
+```
 
 Once installed, you can use the `file-lock` command in your terminal.
 
 ![screenshot](./screenshot.png)
 
-### 1 Encrypt a folder
+<a name="1-encrypt-a-folder"></a>
+### Encrypt a folder
 
 Encrypt a local folder into a secure vault. You will be prompted to enter a password securely (input will be hidden).
 
@@ -56,7 +80,8 @@ file-lock encrypt -i ./my-secrets -o ./my-vault
 **What happens?**
 Your `my-secrets` folder structure will be flattened into `my-vault`. Inside `my-vault`, you will see only files like `a3f1...9b2.enc` and a `vault.config`. No one can tell if it's a video, a document, or a picture.
 
-### 2 Decrypt a vault
+<a name="2-decrypt-a-vault"></a>
+### Decrypt a vault
 
 Restore your files from the vault to a readable folder.
 
@@ -73,7 +98,8 @@ file-lock decrypt -i ./my-vault -o ./restored-files
 **What happens?**
 FileLock reads the encrypted metadata, reconstructs your original directory tree (e.g., `photos/2023/party.jpg`), and restores the file contents.
 
-## Security Design
+<a name="security-design"></a>
+### Security Design
 
 We take security seriously. Here is the cryptographic stack used in FileLock:
 
@@ -84,11 +110,50 @@ We take security seriously. Here is the cryptographic stack used in FileLock:
     * This ensures that even if two files have identical content, their encrypted output will be completely different.
     * GCM mode ensures data integrity; any modification to the encrypted file will cause decryption to fail immediately.
 
-## Contributing
+## Configuration
 
+Configuration is supplied through command-line options; no additional application settings file is required. Use `file-lock --help`, `file-lock encrypt --help` and `file-lock decrypt --help` for the current reference.
+
+Both commands require `--input` and `--output`. Omitting `--password` prompts securely; supplying it explicitly can expose it in shell history and process arguments. Protect the password and vault configuration together with your recovery procedures. The per-command options and vault format behavior are preserved in Usage above.
+
+## Development
+
+Install the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
+
+From the repository root, restore and build:
+
+```bash
+dotnet restore Aiursoft.FileLock.sln
+dotnet build Aiursoft.FileLock.sln --no-restore
+```
+
+<a name="run-locally"></a>
+<a name="local-run"></a>
+Run the tool from source, with the prerequisites and configuration above:
+
+```bash
+dotnet run --project src/Aiursoft.FileLock/Aiursoft.FileLock.csproj -- --help
+```
+
+<a name="run-in-microsoft-visual-studio"></a>
+In Microsoft Visual Studio, open `Aiursoft.FileLock.sln`, select `Aiursoft.FileLock` as the startup project and press `F5`. Configure the arguments and environment for the task you want to run.
+
+Run the existing tests:
+
+```bash
+dotnet test Aiursoft.FileLock.sln --no-restore
+```
+
+
+## How to contribute
+
+<a name="contributing"></a>
 There are many ways to contribute to the project: logging bugs, submitting pull requests, reporting issues, and creating suggestions.
+
+Even if you have push rights on the repository, you should create a personal fork and create feature branches there when you need them. This keeps the main repository clean and your workflow cruft out of sight.
+
+We're also interested in your feedback on the future of this project. You can submit a suggestion or feature request through the issue tracker. To make this process more effective, we're asking that these include more information to help define them more clearly.
 
 ## License
 
-[MIT](https://www.google.com/search?q=LICENSE)
-
+Licensed under the [MIT License](https://github.com/AiursoftWeb/filelock/blob/master/LICENSE).
